@@ -1,0 +1,410 @@
+html
+  head
+    title=title
+    link(
+      href='/css/mainStyle.css',
+      rel='stylesheet'
+    )
+    //- link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    script(src="/blockly_compressed.js")
+    script(src="/blocks_compressed.js")
+    script(src="/msg/js/en.js")
+    script(src="/js/ajax.js")
+    script(src="/javascript_compressed.js")
+
+    script(src="/blocks/rectangle.js")
+    script(src="/blocks/circle.js")
+    script(src="/blocks/polygon.js")
+    script(src="/blocks/extrude.js")
+    script(src="/blocks/gear.js")
+    script(src="/blocks/boolean.js")
+    script(src="/blocks/moveto.js")
+    script(src="/blocks/rotate.js")
+    script(src="/blocks/elipse.js")
+    script(src="/blocks/points.js")
+    script(src="/blocks/lathe.js")
+    script(src="/blocks/nurb.js")
+
+    script(src="/three.min.js")
+    script(src="/js/ThreeCSG.js")
+
+    script(src="/js/NURBSCurve.js")
+    script(src="/js/NURBSUtils.js")
+    script(src="/js/stats.min.js")
+    script(src="/js/OrbitControls.js")
+    script(src="/js/stopwatch.js")
+    script(src="/js/THREE2STL.js")
+    
+  body
+   div
+         &#x25C0; 
+         a(href="/")  Return to home page
+         button.mybutton(onClick="getxml();") Save
+   div  
+    h1="Project Name : " + projectName + "  "
+      
+
+      
+   if errors
+        each error in errors
+          div.alert.alert-danger
+            span #{error.error}
+            
+   div#blocklyDiv
+   div.stopwatch.basic
+   
+   script(src="/js/renderthreejs.js")
+   script(src="/js/blocklyinject.js")
+   script(src="/js/showrun.js")
+
+   script.
+     var elems = document.getElementsByClassName("basic");
+     for (var i=0, len=elems.length; i<len; i++) {
+     new Stopwatch(elems[i]);}
+     function stlexport(){
+      var alltheChildren = scene.children;
+      var getcombineObject = alltheChildren[alltheChildren.length-1];
+      var flager=0;
+  
+      for(var k=alltheChildren.length-1;k>=0;k--){
+        var thelastObject = alltheChildren[k];
+          if (thelastObject instanceof THREE.Mesh) {
+            if (flager==0){
+              getcombineObject=alltheChildren[k];
+              flager=1;
+            }
+            else
+              THREE.GeometryUtils.merge(getcombineObject.geometry, thelastObject);
+          }
+      }
+      
+     var myStlString = stlFromGeometry( getcombineObject.geometry, {download:true} );
+      }
+   //-#canvas
+   
+   div
+    p &nbsp;
+    button(onClick="runCode();") Run Code
+    button(onClick="stlexport();") Export to STL
+
+   //- p 
+   //-  a.btn.btn-primary(onClick="loadxml();") load
+
+   
+
+  xml#toolbox
+    |<category name="Shapes">
+    |<block type="rectangle">
+    |<value name="length">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |<value name="breadth">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |</block>
+    |<block type="circle">
+    |<value name="radius">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |</block>
+    |<block type="elipse">
+    |<value name="radius1">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |<value name="radius2">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |</block>
+    |<block type="polygon">
+    |<value name="sides">
+    |<block type="math_number">
+    |<field name="NUM">3</field>
+    |</block>
+    |</value>
+    |<value name="circumradius">
+    |<block type="math_number">
+    |<field name="NUM">3</field>
+    |</block>
+    |</value>
+    |</block>
+    |<block type="gear">
+    |<value name="teeth">
+    |<block type="math_number">
+    |<field name="NUM">12</field>
+    |</block>
+    |</value>
+    |</block>
+    |<block type="nurb">
+    |</block>
+    |</category>
+    |<category name="3D Operations">
+    |<block type="extrude">
+    |<value name="amount">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    |</block>
+    |</value>
+    |</block>
+
+    |<block type="boolean">
+    |</block>
+    |<block type="lathe">
+    |</block>
+    |<block type="moveto">
+    |<value name="x">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |<value name="y">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |<value name="z">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |</block>
+    |<block type="rotate">
+    |<value name="x">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |<value name="y">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |<value name="z">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    |</block>
+
+    |<block type="points">
+    
+    |<value name="xnurb">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+    
+    |<value name="ynurb">
+    |<block type="math_number">
+    |<field name="NUM">0</field>
+    
+    |</block>
+    |</value>
+
+    
+    |</block>
+    
+    |</category>
+    |<category name="Flow">
+
+    |<block type="controls_if">
+    |</block>
+    |<block type="controls_if">
+    <mutation else="1"></mutation>
+    
+    |</block>
+    |<block type="controls_if">
+    <mutation elseif="1" else="1"></mutation>
+    
+    |</block>
+
+
+    |<block type="controls_repeat_ext">
+    
+    |<value name="TIMES">
+    |<block type="math_number">
+    |<field name="NUM">10</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="controls_whileUntil">
+    |</block>
+    |<block type="controls_for">
+    |<field name="VAR">i</field>
+    
+    |<value name="FROM">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    
+    |</block>
+    |</value>
+    
+    |<value name="TO">
+    |<block type="math_number">
+    |<field name="NUM">10</field>
+    
+    |</block>
+    |</value>
+    
+    |<value name="BY">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="controls_forEach">
+    |</block>
+    |<block type="controls_flow_statements">
+    |</block>
+
+    
+    |</category>
+    |<category name="Abstract" >
+    |<category name="Variables" custom="VARIABLE">
+    |</category>
+    |<category name="Functions" custom="PROCEDURE">
+    |</category>
+    
+    |</category>
+    |<category name="Logic">
+    |<block type="logic_compare">
+    |</block>
+    |<block type="logic_operation">
+    |</block>
+    |<block type="logic_negate">
+    |</block>
+    |<block type="logic_boolean">
+    |</block>
+    |<block type="logic_null">
+    |</block>
+    |<block type="logic_ternary">
+    |</block>
+    
+    |</category>
+    |<category name="Math">
+    |<block type="math_number">
+    |</block>
+    |<block type="math_arithmetic">
+    |</block>
+    |<block type="math_single">
+    |</block>
+    |<block type="math_trig">
+    |</block>
+    |<block type="math_constant">
+    |</block>
+    |<block type="math_number_property">
+    |</block>
+    |<block type="math_change">
+    
+    |<value name="DELTA">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="math_round">
+    |</block>
+    |<block type="math_on_list">
+    |</block>
+    |<block type="math_modulo">
+    |</block>
+    |<block type="math_constrain">
+    
+    |<value name="LOW">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    
+    |</block>
+    |</value>
+    
+    |<value name="HIGH">
+    |<block type="math_number">
+    |<field name="NUM">100</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="math_random_int">
+    
+    |<value name="FROM">
+    |<block type="math_number">
+    |<field name="NUM">1</field>
+    
+    |</block>
+    |</value>
+    
+    |<value name="TO">
+    |<block type="math_number">
+    |<field name="NUM">100</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="math_random_float">
+    |</block>
+    
+    |</category>
+    |<category name="Lists">
+    |<block type="lists_create_empty">
+    |</block>
+    |<block type="lists_create_with">
+    |</block>
+    |<block type="lists_repeat">
+    
+    |<value name="NUM">
+    |<block type="math_number">
+    |<field name="NUM">5</field>
+    
+    |</block>
+    |</value>
+    
+    |</block>
+    |<block type="lists_length">
+    |</block>
+    |<block type="lists_isEmpty">
+    |</block>
+    |<block type="lists_indexOf">
+    |</block>
+    |<block type="lists_getIndex">
+    |</block>
+    |<block type="lists_setIndex">
+    |</block>
+    
+    |</category>     
+    |<category name="Text">
+    |<block type="text">
+    |</block>
+    |<block type="text_length">
+    |</block>
+    |<block type="text_print">
+    |</block>
+     
+    
+    |</category>
+   
+    
+  

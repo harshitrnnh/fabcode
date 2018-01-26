@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>home</title>
+	
+	{{#css}}
+  <link rel="stylesheet" href="{{css/bootstrap.min.css}}">
+	{{/css}}
+
+</head>
+<body>
+	
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Hello</h1>
+	
+	{{#if user }}
+		<p>welcome, #{user.fullName} 
+		</p>
+	{{/if}}
+	    </div>
+</div>
+</body>
+</html>
