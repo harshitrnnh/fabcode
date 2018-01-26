@@ -1,0 +1,25 @@
+{
+  "name": "fabcode",
+  "version": "1.0.0",
+  "authors": [
+    "prabhat <harshit.rnnh@gmail.com>"
+  ],
+  "description": "powerful tool to build 3d objects",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "views/home.jade",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "blockly": "https://github.com/google/blockly.git",
+    "threejs": "*"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "my-webapp",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "6.10.0"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bower": "^1.8.0",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
+    "express": "^4.15.4",
+    "forms": "^1.3.0",
+    "jade": "^1.11.0",
+    "xtend": "^4.0.1",
+    "cors": "^2.8.1",
+    "express-stormpath": "^4.0.0"
+  }
+}
